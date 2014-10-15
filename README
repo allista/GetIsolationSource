@@ -1,0 +1,5 @@
+Gets isolation sources given the set of sequences with specified accession 
+numbers as given by SILVA tools. Generates distribution of retrieved sources.
+
+It requires BioPython to work. On Linux install it as follows:
+sudo easy_install biopython
