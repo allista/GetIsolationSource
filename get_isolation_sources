@@ -147,6 +147,19 @@ def get_isolation_sources(rec):
 #end def
 
 
+def retry(func, error_msg):
+    for i in xrange(_NUM_RETRIES):
+        try:
+            result = func()
+            break
+        except Exception as e:
+            print(e)
+            if i == _NUM_RETRIES-1:
+                raise RuntimeError(error_msg)
+    return result
+#end def
+        
+
 def get_records_for_ids(records, start=0, num=20):
     #compose a query
     subset = records[start:start+num]
@@ -154,11 +167,8 @@ def get_records_for_ids(records, start=0, num=20):
     query  = ' or '.join(rec.id.split('.')[0] for rec in subset)
     #perform the query
     print('Query with accession numbers %d-%d' % (start+1, stop))
-    try: results = Entrez.read(Entrez.esearch(db='nucleotide', term=query, usehistory="y"))
-    except Exception as e:
-        print(e)
-        raise RuntimeError('Unable to get Entrez IDs for sequences %d-%d' 
-                           % (start+1, stop))
+    results = retry(lambda : Entrez.read(Entrez.esearch(db='nucleotide', term=query, usehistory="y")),
+                    'Unable to get Entrez IDs for sequences %d-%d' % (start+1, stop))
     if not results['IdList']:
         print('NCBI returned no result for the accession numbers from sequences %d-%d' 
               % (start+1, stop))
@@ -168,13 +178,10 @@ def get_records_for_ids(records, start=0, num=20):
     #fetch genbank data for the received IDs 
     num_results = len(results['IdList'])
     print('Downloading data...')
-    try: data = Entrez.efetch(db="nucleotide", rettype="gb", retmode="text",
-                                retstart=0, retmax=num_results, complexity=4,
-                                webenv=webenv, query_key=query_key)
-    except Exception as e:
-        print(e)
-        raise RuntimeError('Unable to download data for sequences %d-%d' 
-                           % (start+1, stop))
+    data = retry(lambda : Entrez.efetch(db="nucleotide", rettype="gb", retmode="text",
+                                    retstart=0, retmax=num_results, complexity=4,
+                                    webenv=webenv, query_key=query_key),
+                 'Unable to download data for sequences %d-%d' % (start+1, stop))
     #parse received data
     try: records = list(SeqIO.parse(data, 'gb'))
     except Exception as e: 
@@ -186,9 +193,10 @@ def get_records_for_ids(records, start=0, num=20):
 #end def
 #------------------------------------------------------------------------------#
 
-_PAUSE_EACH = 100
-_BATCH      = 20
-_START_TIME = time()
+_NUM_RETRIES = 3
+_PAUSE_EACH  = 100
+_BATCH       = 20
+_START_TIME  = time()
 
 #------------------------------------------------------------------------------#
 if __name__ == '__main__':
@@ -201,9 +209,12 @@ if __name__ == '__main__':
                         help='Your e-mail is required by NCBI when you use Entrez API.')
     parser.add_argument('-p --pause', dest='pause', metavar='sec', type=int, nargs=1, default=60,
                         help='Pause in seconds in between of series of Entrez queries.')
+    parser.add_argument('-r --retries', dest='retries', metavar='times', type=int, nargs=1, default=3,
+                        help='Number of retries on network failure.')
     parser.add_argument('files', metavar='file', type=str, nargs='+',
                         help='File(s) in fasta format with sequences and accession numbers.')
     args = parser.parse_args()
+    _NUM_RETRIES = args.retries;
     #job name and working dir
     jobname = os.path.basename(args.files[0]).split('.')[0]
     dirname = os.path.dirname(args.files[0])
