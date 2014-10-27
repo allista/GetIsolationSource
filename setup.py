@@ -34,7 +34,7 @@ setup(name='GetIsolationSources',
       version='1.2',
       description='Gets isolation sources given the set of sequences with '
       'specified accession numbers as given by SILVA tools.',
-      long_description=read('README'),
+      long_description=read('README.md'),
       license='GPL-3',
       author='Allis Tauri',
       author_email='allista@gmail.com',
