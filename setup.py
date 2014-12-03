@@ -31,7 +31,7 @@ def read(fname):
 
 from distutils.core import setup
 setup(name='GetIsolationSources',
-      version='1.2',
+      version='1.4',
       description='Gets isolation sources given the set of sequences with '
       'specified accession numbers as given by SILVA tools.',
       long_description=read('README.md'),
@@ -40,7 +40,7 @@ setup(name='GetIsolationSources',
       author_email='allista@gmail.com',
       #url='https://launchpad.net/degenprimer',
       classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Topic :: Scientific/Engineering :: Bio-Informatics',
         'Intended Audience :: Science/Research',
         'Operating System :: POSIX',
