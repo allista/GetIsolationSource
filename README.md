@@ -12,4 +12,4 @@ It is distributed as a source code supporting python setup tools, and as a stand
 
 ***
 
-**GetIsolationSources** by [**Evgeny Taranov**](https://www.linkedin.com/pub/evgeny-taranov/a6/b71/62a) is licensed under the [MIT](http://opensource.org/licenses/MIT) license.
+**GetIsolationSources** by [**Evgeny Taranov**](https://www.linkedin.com/pub/evgeny-taranov/a6/b71/62a) is licensed under the [MIT](https://github.com/allista/GetIsolationSources/blob/master/LICENSE) license.
