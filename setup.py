@@ -31,11 +31,11 @@ def read(fname):
 
 from distutils.core import setup
 setup(name='GetIsolationSources',
-      version='1.4',
+      version='1.5',
       description='Gets isolation sources given the set of sequences with '
       'specified accession numbers as given by SILVA tools.',
       long_description=read('README.md'),
-      license='GPL-3',
+      license='MIT',
       author='Allis Tauri',
       author_email='allista@gmail.com',
       #url='https://launchpad.net/degenprimer',
