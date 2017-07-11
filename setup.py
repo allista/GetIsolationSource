@@ -37,7 +37,7 @@ def lines(fname):
 
 from distutils.core import setup
 setup(name='GetIsolationSources',
-      version='1.5.1.1',
+      version='1.5.1.2',
       description='Retrieves isolation sources from NCBI given the set of sequences with '
       'specified accession numbers. Both nucleotide and protein accessions are accepted.',
       long_description=read('README.md'),
