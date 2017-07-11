@@ -15,11 +15,12 @@
 # 
 # You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+
+"""
 Created on Oct 14, 2014
 
 @author: Allis Tauri <allista@gmail.com>
-'''
+"""
 
 # Utility function to read the README file.
 # Used for the long_description.  It's nice, because now 1) we have a top level
@@ -27,17 +28,18 @@ Created on Oct 14, 2014
 # string in below ...
 
 import os
+from distutils.core import setup
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 def lines(fname):
     return list(l.strip() for l in open(os.path.join(os.path.dirname(__file__), fname)))
 
 
-from distutils.core import setup
 setup(name='GetIsolationSources',
-      version='1.5.1.2',
+      version='1.5.2',
       description='Retrieves isolation sources from NCBI given the set of sequences with '
       'specified accession numbers. Both nucleotide and protein accessions are accepted.',
       long_description=read('README.md'),
