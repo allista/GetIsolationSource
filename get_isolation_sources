@@ -169,7 +169,7 @@ class BatchEntrez(object):
 #                   MGA:     re.compile(r'\b([a-zA-Z]{5}\d{7})\b'),
                    UPROT:   re.compile(r'\b([OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2})\b'),
                    REFSEQN: re.compile(r'\b([ANX][CGTWSZMR]_\d+)\b'),
-                   REFSEQP: re.compile(r'\b([ANYXZ]P_\d+)\b'),
+                   REFSEQP: re.compile(r'\b([ANYXZW]P_\d+)\b'),
                    }
     ID_TO_DB = {
                 NUC:     'nucleotide',
