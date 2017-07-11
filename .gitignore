@@ -4,3 +4,4 @@ dist/**
 *.log
 *.csv
 *~
+test_data/**
