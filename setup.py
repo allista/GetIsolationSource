@@ -25,9 +25,15 @@ Created on Oct 14, 2014
 # Used for the long_description.  It's nice, because now 1) we have a top level
 # README file and 2) it's easier to type in the README file than to put a raw
 # string in below ...
+
 import os
+
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+def lines(fname):
+    return list(l.strip() for l in open(os.path.join(os.path.dirname(__file__), fname)))
+
 
 from distutils.core import setup
 setup(name='GetIsolationSources',
@@ -48,5 +54,5 @@ setup(name='GetIsolationSources',
         'Programming Language :: Python'],
       packages=[],
       scripts=['get_isolation_sources'],
-      install_requires=['biopython'],
+      install_requires=lines('requirements.txt'),
       )
