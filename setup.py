@@ -31,14 +31,15 @@ def read(fname):
 
 from distutils.core import setup
 setup(name='GetIsolationSources',
-      version='1.5',
+      version='1.5.1',
       description='Gets isolation sources given the set of sequences with '
-      'specified accession numbers as given by SILVA tools.',
+      'specified accession numbers. Both nucleotide and protein accessions are accepted.',
       long_description=read('README.md'),
       license='MIT',
       author='Allis Tauri',
       author_email='allista@gmail.com',
-      #url='https://launchpad.net/degenprimer',
+      url='https://github.com/allista/GetIsolationSources',
+      keywords=['bioinformatics', 'ncbi', 'entrez'],
       classifiers=[
         'Development Status :: 4 - Beta',
         'Topic :: Scientific/Engineering :: Bio-Informatics',
@@ -47,5 +48,4 @@ setup(name='GetIsolationSources',
         'Programming Language :: Python'],
       packages=[],
       scripts=['get_isolation_sources'],
-      #data_files=[('share/applications', ['DegenPrimer.desktop'])]
       )
