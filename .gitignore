@@ -5,3 +5,4 @@ dist/**
 *.csv
 *~
 test_data/**
+MANIFEST
